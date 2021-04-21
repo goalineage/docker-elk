@@ -66,6 +66,18 @@ services:
       - elk
     depends_on:
       - elasticsearch
+      
+  rabbitmq:
+    build:
+      context: rabbitmq/
+    hostname: rabbitmq-node
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+     - RABBITMQ_ERLANG_COOKIE=cluster_cookie   
+    networks:
+      - elk
 
 networks:
   elk:
